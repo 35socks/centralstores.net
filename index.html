@@ -1,324 +1,564 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Central Stores</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11100e">
+  <meta name="description" content="Central Stores — listen to Tug of War, find upcoming shows, and sign the guestbook.">
+  <title>Central Stores — Official Website</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Martian+Mono:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script data-goatcounter="https://centralstores.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-<style>
-/* Layout: 3-column table-era page (nav | main | junk) in a beveled gray box on a tiled navy background. Single deliberate look. */
-:root{
-  --navy:#1b3a6b; --navy-tile:#2a4f8a; --silver:#c0c0c0;
-  --yellow:#ffe600; --ink:#111111; --lime:#39ff14; --hot:#ff00cc; --link:#0000ee; --visited:#551a8b;
-  --font-body:"Comic Sans MS","Comic Sans","Chalkboard SE",Verdana,sans-serif;
-  --font-display:Impact,"Arial Black",Haettenschweiler,sans-serif;
-  --font-serif:"Times New Roman",Times,serif;
-  --font-mono:"Courier New",Courier,monospace;
-  color-scheme:light;
-}
-*{box-sizing:border-box}
-html{background:var(--navy)}
-body{
-  margin:0;
-  background-color:var(--navy);
-  background-image:linear-gradient(45deg,var(--navy-tile) 25%,transparent 25%,transparent 75%,var(--navy-tile) 75%),linear-gradient(45deg,var(--navy-tile) 25%,transparent 25%,transparent 75%,var(--navy-tile) 75%);
-  background-size:24px 24px; background-position:0 0,12px 12px;
-  color:var(--ink); font-family:var(--font-body); font-size:14px; line-height:1.35;
-  padding-block:12px;
-  padding-left:max(16px,env(safe-area-inset-left,0px));
-  padding-right:max(16px,env(safe-area-inset-right,0px));
-}
-a{color:var(--link)} a:visited{color:var(--visited)}
-.wrap{max-width:860px;margin:0 auto;background:var(--silver);border:4px outset #fff;padding:6px}
+    async src="https://gc.zgo.at/count.js"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #171512;
+      --paper: #f1ede4;
+      --paper-muted: #d8d1c4;
+      --rust: #a64e2e;
+      --rust-dark: #71341f;
+      --gold: #d5aa68;
+      --line: rgba(32, 27, 21, .17);
+      --sans: "DM Sans", sans-serif;
+      --display: "Oswald", Impact, sans-serif;
+    }
 
-/* marquee */
-.marq{background:var(--ink);color:var(--lime);font-family:var(--font-mono);font-weight:bold;overflow:hidden;white-space:nowrap;border:2px inset #888;padding:3px 0}
-.marq span{display:inline-block;padding-left:100%;animation:scroll 18s linear infinite}
-@keyframes scroll{to{transform:translateX(-100%)}}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    a:focus-visible { outline: 2px solid var(--gold); outline-offset: 5px; }
 
-/* wordart header */
-.head{text-align:center;padding:10px 4px 4px;background:linear-gradient(#ffe600 0 50%,#ffb300 50% 100%);border:3px ridge #fff;margin-top:6px;overflow:hidden}
-.head h1{margin:0;font-family:var(--font-display);font-size:clamp(34px,10vw,76px);line-height:1;letter-spacing:2px;text-transform:uppercase;
-  background:linear-gradient(90deg,#ff0000,#ff9900,#ffee00,#33cc33,#0066ff,#9900cc,#ff0000);-webkit-background-clip:text;background-clip:text;color:transparent;
-  -webkit-text-stroke:2px var(--ink);filter:drop-shadow(4px 4px 0 var(--ink));transform:skew(-4deg) rotate(-1.5deg);text-wrap:balance}
-.head .sub{font-family:var(--font-serif);font-style:italic;font-size:18px;margin:6px 0 4px}
-.stripe{height:14px;background:repeating-linear-gradient(-45deg,var(--yellow) 0 14px,var(--ink) 14px 28px);border-block:2px solid var(--ink)}
-.blink{animation:blink 1s steps(2,start) infinite}
-@keyframes blink{to{visibility:hidden}}
-.new{display:inline-block;background:red;color:#fff;font:bold 11px var(--font-body);padding:0 4px;margin-left:4px;vertical-align:middle}
+    .hero {
+      min-height: min(900px, 100svh);
+      min-height: max(720px, min(900px, 100svh));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+      position: relative;
+      isolation: isolate;
+      padding: clamp(16px, 3.5vh, 38px) 20px 52px;
+      background: #080a0b url("images/rope_widescreen.png") center 48% / cover no-repeat;
+      color: #fff;
+      text-align: center;
+    }
+    .hero::before {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      content: "";
+      background:
+        linear-gradient(180deg, rgba(5, 6, 7, .35), rgba(5, 6, 7, .06) 45%, rgba(5, 6, 7, .78)),
+        radial-gradient(ellipse at center, transparent 10%, rgba(5, 6, 7, .34) 100%);
+    }
+    .hero-mark {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      transform: translateX(-50%);
+    }
+    .hero-band {
+      margin: 0 0 -2px;
+      color: rgba(255, 255, 255, .86);
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: .34em;
+      text-transform: uppercase;
+    }
+    .hero-title {
+      display: block;
+      width: min(64vw, 600px);
+      height: auto;
+      mix-blend-mode: screen;
+    }
+    .hero-release {
+      display: block;
+      width: min(31vw, 330px);
+      min-width: 220px;
+      height: auto;
+      margin-top: clamp(-44px, -3vw, -22px);
+      mix-blend-mode: screen;
+    }
+    .hero-actions {
+      position: absolute;
+      z-index: 1;
+      right: 20px;
+      bottom: clamp(24px, 5vh, 48px);
+      left: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: clamp(12px, 2vw, 20px);
+    }
+    .wood-button {
+      display: inline-flex;
+      min-width: clamp(180px, 21vw, 230px);
+      min-height: 58px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      border: 1px solid rgba(255, 255, 255, .75);
+      border-radius: 0;
+      background: transparent;
+      color: #fff;
+      font-family: "Martian Mono", monospace;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      line-height: 1.4;
+      text-align: center;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color .18s ease, background-color .18s ease, border-color .18s ease;
+    }
+    .wood-button:hover {
+      border-color: #fff;
+      background: #fff;
+      color: var(--ink);
+    }
+    .wood-button:active {
+      background: rgba(255, 255, 255, .88);
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
 
-/* columns */
-.cols{display:grid;grid-template-columns:150px minmax(0,1fr) 150px;gap:6px;margin-top:6px}
-.col{min-width:0;display:flex;flex-direction:column;gap:6px}
-.box{background:#e8e8e8;border:2px groove #fff;padding:6px;min-width:0}
-.box h2{margin:-6px -6px 6px;padding:2px 6px;font:bold 13px var(--font-body);background:linear-gradient(90deg,#000080,#1084d0);color:#fff;text-transform:uppercase;letter-spacing:1px}
-.nav a{display:block;margin-bottom:4px;padding:4px 6px;background:var(--silver);border:3px outset #fff;color:var(--ink);font:bold 13px var(--font-body);text-decoration:none;text-align:center}
-.nav a:hover,.nav a:focus-visible{background:var(--yellow);border-style:inset;outline:2px dotted var(--hot)}
-.nav a:visited{color:var(--ink)}
+    .site-nav {
+      position: sticky;
+      z-index: 5;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      gap: clamp(20px, 5vw, 64px);
+      padding: 17px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(23, 21, 18, .96);
+      color: var(--paper);
+      backdrop-filter: blur(12px);
+    }
+    .site-nav a {
+      color: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color .18s ease;
+    }
+    .site-nav a:hover { color: var(--gold); }
 
-/* wet floor sign */
-.sign{display:flex;gap:8px;align-items:center;justify-content:center;background:var(--yellow);border:4px solid var(--ink);padding:6px;font-family:var(--font-display);font-size:clamp(20px,5vw,30px);text-transform:uppercase;text-align:center}
-.sign small{display:block;font:bold 11px var(--font-body)}
+    main { overflow: hidden; }
+    .section {
+      width: min(1120px, calc(100% - 48px));
+      margin-inline: auto;
+      padding-block: clamp(68px, 9vw, 118px);
+    }
+    .eyebrow {
+      margin: 0 0 15px;
+      color: var(--rust);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h2, h3 {
+      font-family: var(--display);
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-size: clamp(38px, 6vw, 66px);
+      letter-spacing: -.025em;
+      line-height: 1;
+    }
+    .music {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(270px, .7fr);
+      align-items: center;
+      gap: clamp(36px, 8vw, 110px);
+    }
+    .music-copy { max-width: 560px; }
+    .music-copy > p:not(.eyebrow) {
+      max-width: 450px;
+      margin-bottom: 0;
+      color: #625a4e;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .record-card {
+      position: relative;
+      display: grid;
+      min-height: 270px;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .1);
+      background:
+        radial-gradient(ellipse at 70% 20%, rgba(213, 170, 104, .28), transparent 42%),
+        linear-gradient(135deg, #382d24, #1d1b18 70%);
+      box-shadow: 0 18px 40px rgba(52, 40, 27, .16);
+      color: #f6f0e5;
+    }
+    .record-card::before {
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      border: 1px solid rgba(241, 237, 228, .19);
+      border-radius: 50%;
+      box-shadow: 0 0 0 12px rgba(241, 237, 228, .035), 0 0 0 25px rgba(241, 237, 228, .025), 0 0 0 38px rgba(241, 237, 228, .02);
+      content: "";
+    }
+    .record-label {
+      z-index: 1;
+      display: grid;
+      width: 142px;
+      height: 142px;
+      place-content: center;
+      border: 1px solid rgba(255, 255, 255, .3);
+      border-radius: 50%;
+      background: var(--rust);
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
+    }
+    .record-label span:first-child {
+      font-family: var(--display);
+      font-size: 19px;
+      letter-spacing: .06em;
+    }
+    .record-label span:last-child {
+      margin-top: 6px;
+      color: #f5d8a8;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .2em;
+    }
 
-.tbl{width:100%;border-collapse:collapse;background:#fff;font-size:13px}
-.tbl th{background:var(--ink);color:var(--lime);font-family:var(--font-mono);text-align:left;padding:2px 6px}
-.tbl td{border:1px solid #888;padding:2px 6px;overflow-wrap:anywhere}
+    .details {
+      border-block: 1px solid var(--line);
+      background: #e8e2d7;
+    }
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .detail {
+      min-height: 235px;
+      padding: clamp(26px, 5vw, 56px);
+    }
+    .detail + .detail { border-left: 1px solid var(--line); }
+    .detail h3 {
+      margin-bottom: 24px;
+      font-size: 27px;
+      letter-spacing: .02em;
+    }
+    .show-date {
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+      padding-top: 17px;
+      border-top: 1px solid var(--line);
+    }
+    .show-date strong {
+      color: var(--rust);
+      font-family: var(--display);
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .show-date span {
+      color: #625a4e;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .instagram-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 17px;
+      border: 1px solid rgba(166, 78, 46, .38);
+      color: var(--rust-dark);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background .18s ease, color .18s ease;
+    }
+    .instagram-card::before {
+      display: grid;
+      width: 31px;
+      height: 31px;
+      place-items: center;
+      border: 1px solid currentColor;
+      border-radius: 9px;
+      content: "ig";
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    .instagram-card:hover { background: var(--rust); color: #fff8eb; }
 
-.songs{list-style:none;margin:0;padding:0;font-family:var(--font-mono);font-size:13px}
-.songs li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:4px;background:#ffffcc;border-bottom:1px dotted #666;flex-wrap:wrap}
-.songs b{overflow-wrap:anywhere}
-.dl{display:inline-block;padding:3px 10px;background:var(--lime);color:var(--ink);border:3px outset #fff;font:bold 13px var(--font-body);text-decoration:none;text-transform:uppercase}
-.dl:visited{color:var(--ink)}
-.dl:hover,.dl:focus-visible{background:var(--yellow);border-style:inset;outline:2px dotted var(--hot)}
-.dl:active{border-style:inset}
+    .guestbook-section { padding-bottom: clamp(70px, 10vw, 130px); }
+    .guestbook-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    .guestbook-heading h2 { margin-bottom: 0; }
+    .guestbook-heading p {
+      max-width: 300px;
+      margin-bottom: 5px;
+      color: #625a4e;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .guestbook-frame {
+      min-height: 180px;
+      padding: clamp(16px, 3vw, 28px);
+      border: 1px solid var(--line);
+      background: #fbf9f4;
+    }
+    .guestbook-note {
+      margin: 0;
+      color: #625a4e;
+      font-size: 13px;
+    }
+    .guestbook-note[hidden] { display: none; }
 
-/* counter */
-.counter{display:flex;justify-content:center;gap:2px;margin:4px 0}
-.counter i{font:bold 18px var(--font-mono);font-style:normal;background:var(--ink);color:var(--lime);padding:0 4px;border:1px inset #888}
-.tiny{font-size:11px;text-align:center}
-.ig{display:block;padding:4px 6px;background:var(--hot);color:#fff;border:3px outset #fff;font:bold 12px var(--font-body);text-align:center;text-decoration:none;overflow-wrap:anywhere}
-.ig:visited{color:#fff}
-.ig:hover,.ig:focus-visible{background:var(--yellow);color:var(--ink);border-style:inset;outline:2px dotted var(--ink)}
-.badges{display:flex;flex-direction:column;align-items:center;gap:4px}
-.badges img{display:block;width:88px;height:31px;image-rendering:pixelated}
-hr.rb{border:0;height:6px;margin:6px 0;background:linear-gradient(90deg,red,orange,yellow,lime,cyan,blue,magenta)}
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 27px max(24px, calc((100% - 1120px) / 2));
+      background: var(--ink);
+      color: rgba(241, 237, 228, .72);
+      font-size: 11px;
+    }
+    .footer p { margin: 0; }
+    .visitor-count {
+      display: inline-flex;
+      gap: 3px;
+      margin-left: 7px;
+      color: var(--gold);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: .08em;
+    }
+    .footer a {
+      color: inherit;
+      text-decoration-color: rgba(241, 237, 228, .35);
+      text-underline-offset: 3px;
+    }
+    .footer a:hover { color: var(--gold); }
 
-/* guestbook (giscus) */
-.gbwrap{background:#fff;border:2px inset #888;padding:4px;min-width:0}
-.gbnote{font-family:var(--font-mono);font-size:12px;margin:0}
-
-.foot{margin-top:6px;text-align:center;font-size:11px;background:var(--ink);color:#fff;padding:6px;border:2px inset #888}
-.foot a{color:var(--yellow)}
-
-@media (max-width:720px){
-  .cols{grid-template-columns:minmax(0,1fr)}
-  .col.left{order:1}.col.mid{order:2}.col.right{order:3}
-  .nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
-  .nav h2{grid-column:1/-1}
-  .nav a{margin:0}
-}
-@media (prefers-reduced-motion:reduce){
-  .marq span{animation:none;padding-left:0;white-space:normal;display:block}
-  .marq{white-space:normal}
-  .blink{animation:none}
-}
-</style>
+    @media (max-width: 680px) {
+      .hero {
+        min-height: max(740px, 100svh);
+        justify-content: flex-start;
+        padding-inline: 12px;
+        background-position: 50% 50%;
+      }
+      .hero-mark { top: 54px; }
+      .hero-band { position: absolute; top: 22px; }
+      .hero-title { width: min(84vw, 430px); }
+      .hero-release {
+        width: min(48vw, 250px);
+        min-width: 0;
+        margin-top: -4vw;
+      }
+      .hero-actions {
+        right: 12px;
+        bottom: 26px;
+        left: 12px;
+        gap: 10px;
+      }
+      .wood-button {
+        min-width: 0;
+        min-height: 54px;
+        flex: 1 1 0;
+        padding-inline: 10px;
+        font-size: 10px;
+      }
+      .site-nav { gap: 0; justify-content: space-evenly; padding-inline: 8px; }
+      .site-nav a { font-size: 9px; letter-spacing: .12em; }
+      .section { width: min(100% - 36px, 520px); }
+      .music { grid-template-columns: 1fr; gap: 34px; }
+      .record-card { min-height: 230px; }
+      .details-grid { grid-template-columns: 1fr; }
+      .detail { min-height: 0; padding: 32px 24px; }
+      .detail + .detail { border-top: 1px solid var(--line); border-left: 0; }
+      .guestbook-heading { align-items: start; flex-direction: column; gap: 14px; }
+      .footer { align-items: flex-start; flex-direction: column; padding: 24px 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
 </head>
 <body>
-
-<div class="wrap">
-
-  <div class="marq"><span>*** WELCOME TO THE OFFICIAL CENTRAL STORES WEBSITE *** SIGN THE GUESTBOOK *** FREE DOWNLOAD: TUG OF WAR </span></div>
-
-  <div class="head">
-    <h1>Central Stores</h1>
-    <div class="sub">~ the band ~ <span class="blink">UNDER CONSTRUCTION</span></div>
-  </div>
-  <div class="stripe"></div>
-
-  <div class="cols">
-
-    <!-- LEFT -->
-    <div class="col left">
-      <div class="box nav">
-        <h2>Menu</h2>
-        <a href="#home">HOME</a>
-        <a href="#music">MUSIC <span class="new">NEW!</span></a>
-        <a href="#tour">TOUR</a>
-        <a href="#guestbook">GUESTBOOK</a>
-        <a href="#links">LINKS</a>
-      </div>
-      <div class="box tiny">
-        <h2>Hours</h2>
-        Mon-Fri<br>9am - 5pm<br>
-        <b>Basement level</b><br>
-        <span class="blink">OPEN</span>
-      </div>
+  <header class="hero" id="top">
+    <h1 class="hero-band">Central Stores</h1>
+    <div class="hero-mark">
+      <img class="hero-title" src="images/title.png" draggable="false" alt="Tug of War">
     </div>
-
-    <!-- MIDDLE -->
-    <div class="col mid">
-
-      <div class="box" id="home">
-        <div class="sign">
-          <svg width="34" height="44" viewBox="0 0 34 44" aria-hidden="true"><path d="M17 2 L31 42 H3 Z" fill="#ffe600" stroke="#111" stroke-width="3"/><circle cx="17" cy="16" r="3" fill="#111"/><path d="M12 36 L17 22 L22 36" fill="none" stroke="#111" stroke-width="3"/></svg>
-          <div>Caution<small></small>Live Music</div>
-          <svg width="34" height="44" viewBox="0 0 34 44" aria-hidden="true"><path d="M17 2 L31 42 H3 Z" fill="#ffe600" stroke="#111" stroke-width="3"/><circle cx="17" cy="16" r="3" fill="#111"/><path d="M12 36 L17 22 L22 36" fill="none" stroke="#111" stroke-width="3"/></svg>
-        </div>
-      </div>
-
-      <div class="box" id="music">
-        <h2>Music</h2>
-        <ul class="songs">
-          <li><b>Tug of War</b><a class="dl" href="tugofwar.mp3" download>Free Download</a></li>
-        </ul>
-      </div>
-
-      <div class="box" id="tour">
-        <h2>Tour Dates</h2>
-        <table class="tbl">
-          <tr><th>DATE</th><th>PLACE</th></tr>
-          <tr><td>December 16th</td><td>Ayrshire College</td></tr>
-        </table>
-      </div>
-
-      <div class="box" id="guestbook">
-        <h2>Guestbook</h2>
-        <div class="gbwrap" id="gbwrap">
-          <p class="gbnote" id="gbnote" hidden>Guestbook is loading...</p>
-        </div>
-      </div>
-
+    <div class="hero-actions" aria-label="Listen to Tug of War">
+      <a class="wood-button" href="https://found.ee/tugofwar" target="_blank" rel="noopener noreferrer">Stream</a>
+      <a class="wood-button" href="/audio/tugofwar.mp3" download>Free Download</a>
     </div>
+  </header>
 
-    <!-- RIGHT -->
-    <div class="col right">
-      <div class="box">
-        <h2>Visitors</h2>
-        <div class="counter" id="counter" aria-label="Visitor counter"></div>
-        <div class="tiny">since 2026</div>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="#tour">Shows</a>
+    <a href="#guestbook">Guestbook</a>
+    <a href="#links">Stay In touch</a>
+  </nav>
+
+  <main>
+    <section class="details" aria-label="More from Central Stores">
+      <div class="section details-grid">
+        <article class="detail" id="tour">
+          <p class="eyebrow">Catch us live</p>
+          <h3>Upcoming show</h3>
+          <div class="show-date">
+            <strong>December 16th 2026</strong>
+            <span>Ayrshire College</span>
+          </div>
+        </article>
+        <article class="detail" id="links">
+          <p class="eyebrow">Stay in the loop</p>
+          <h3>Follow us</h3>
+          <a class="instagram-card" href="https://instagram.com/centralstores_" target="_blank" rel="noopener noreferrer">
+            <span>Instagram</span>
+            <span>@centralstores_</span>
+          </a>
+        </article>
       </div>
-      <div class="box" id="links">
-        <h2>Links</h2>
-        <a class="ig" href="https://instagram.com/centralstores_" target="_blank" rel="noopener">INSTAGRAM<br>@centralstores_</a>
-        <hr class="rb">
-        <div class="badges">
-          <a href="https://88x31.nl/" target="_blank" rel="noopener"><img src="gifs/antinazi.gif" width="88" height="31" alt="Anti-Nazi"></a>
-          <a href="https://www.w3.org/html/" target="_blank" rel="noopener"><img src="gifs/html5.png" width="88" height="31" alt="HTML5"></a>
-          <a href="https://archive.org/" target="_blank" rel="noopener"><img src="gifs/internetarchive.gif" width="88" height="31" alt="Internet Archive"></a>
+    </section>
+
+    <section class="section guestbook-section" id="guestbook" aria-labelledby="guestbook-title">
+      <div class="guestbook-heading">
+        <div>
+          <p class="eyebrow">Leave us a note</p>
+          <h2 id="guestbook-title">Guestbook</h2>
         </div>
+        <p>Drop by, say hello, and leave a message for Central Stores.</p>
       </div>
-    </div>
+      <div class="guestbook-frame" id="guestbook-frame">
+        <p class="guestbook-note" id="guestbook-note">Loading the guestbook…</p>
+      </div>
+    </section>
+  </main>
 
-  </div>
+  <footer class="footer">
+    <p>&copy; 2026 Central Stores. All rights reserved.</p>
+    <p>Visitors since 2026 <span class="visitor-count" id="visitor-count" aria-live="polite">------</span></p>
+    <a href="#top">Back to top ↑</a>
+  </footer>
 
-  <div class="stripe" style="margin-top:6px"></div>
-  <div class="foot">
-    Best viewed in Internet Explorer 6.0 at 800x600<br>
-    &copy; 2026 Central Stores.<br>
-    <a href="#home">Back to top</a>
-  </div>
+  <script>
+    (function () {
+      var counter = document.getElementById("visitor-count");
+      var attempts = 0;
 
-</div>
+      function showCount(text) {
+        counter.textContent = text;
+      }
 
-<script>
-/* ============ SETUP (fill these in) ============
-   1. GoatCounter (visitor count): sign up free at goatcounter.com, pick a code,
-      then Settings > turn on "Allow adding visitor counts on your website".
-   2. Giscus (guestbook): enable Discussions on your GitHub repo, install the
-      giscus app, then get your ids at https://giscus.app                          */
-var GC_CODE = "centralstores";
-var GISCUS = {
-  repo: "35socks/centralstores.net",
-  repoId: "R_kgDOVoI8KA",
-  category: "General",
-  categoryId: "DIC_kwDOVoI8KM4DKuvC"
-};
-/* ============================================== */
-
-(function(){
-  var c = document.getElementById("counter");
-
-  function drawCounter(text){
-    c.textContent = "";
-    for (var i = 0; i < text.length; i++) {
-      var d = document.createElement("i");
-      d.textContent = text[i];
-      c.appendChild(d);
-    }
-  }
-
-// Visitor count: wait for GoatCounter to load, then retrieve the count.
-drawCounter("------");
-
-function readCount() {
-  if (
-    !window.goatcounter ||
-    typeof window.goatcounter.get_data !== "function"
-  ) {
-    return false;
-  }
-
-  try {
-    // Get the exact page path GoatCounter is tracking.
-    var path = window.goatcounter.get_data().p;
-
-    fetch(
-      "https://centralstores.goatcounter.com/counter/" +
-      encodeURIComponent(path) +
-      ".json"
-    )
-      .then(function (response) {
-        if (!response.ok) throw new Error("HTTP " + response.status);
-        return response.json();
-      })
-      .then(function (data) {
-        var count = String(data.count).replace(/[^0-9]/g, "");
-
-        // Keep the retro six-digit counter.
-        while (count.length < 6) {
-          count = "0" + count;
+      function readCount() {
+        if (!window.goatcounter || typeof window.goatcounter.get_data !== "function") {
+          return false;
         }
 
-        drawCounter(count);
-      })
-      .catch(function (error) {
-        console.error("GoatCounter error:", error);
-        drawCounter("ERROR");
+        var path = window.goatcounter.get_data().p;
+        fetch("https://centralstores.goatcounter.com/counter/" + encodeURIComponent(path) + ".json")
+          .then(function (response) {
+            if (!response.ok) throw new Error("Visitor count request failed: HTTP " + response.status);
+            return response.json();
+          })
+          .then(function (data) {
+            var count = String(data.count).replace(/[^0-9]/g, "");
+            showCount(count.padStart(6, "0"));
+          })
+          .catch(function (error) {
+            console.error("Could not load the visitor count:", error);
+            showCount("OFFLINE");
+          });
+        return true;
+      }
+
+      var counterTimer = window.setInterval(function () {
+        attempts += 1;
+        if (readCount()) {
+          window.clearInterval(counterTimer);
+        } else if (attempts >= 50) {
+          window.clearInterval(counterTimer);
+          showCount("OFFLINE");
+        }
+      }, 100);
+
+      var frame = document.getElementById("guestbook-frame");
+      var note = document.getElementById("guestbook-note");
+      var guestbook = {
+        repo: "35socks/centralstores.net",
+        repoId: "R_kgDOVoI8KA",
+        category: "General",
+        categoryId: "DIC_kwDOVoI8KM4DKuvC"
+      };
+      var script = document.createElement("script");
+      script.src = "https://giscus.app/client.js";
+      script.async = true;
+      script.crossOrigin = "anonymous";
+      script.setAttribute("data-repo", guestbook.repo);
+      script.setAttribute("data-repo-id", guestbook.repoId);
+      script.setAttribute("data-category", guestbook.category);
+      script.setAttribute("data-category-id", guestbook.categoryId);
+      script.setAttribute("data-mapping", "specific");
+      script.setAttribute("data-term", "Guestbook");
+      script.setAttribute("data-strict", "0");
+      script.setAttribute("data-reactions-enabled", "0");
+      script.setAttribute("data-emit-metadata", "0");
+      script.setAttribute("data-input-position", "top");
+      script.setAttribute("data-theme", "light");
+      script.setAttribute("data-lang", "en");
+      script.addEventListener("load", function () {
+        note.hidden = true;
       });
-
-    return true;
-  } catch (error) {
-    console.error("Could not read GoatCounter:", error);
-    return false;
-  }
-}
-
-// Wait for the GoatCounter script to become available.
-var attempts = 0;
-
-var counterTimer = setInterval(function () {
-  attempts++;
-
-  if (readCount() || attempts >= 50) {
-    clearInterval(counterTimer);
-
-    if (attempts >= 50) {
-      drawCounter("OFFLINE");
-    }
-  }
-}, 100);
-
-  // Guestbook: Giscus stores entries as GitHub Discussions on your repo.
-  var wrap = document.getElementById("gbwrap");
-  var note = document.getElementById("gbnote");
-  if (GISCUS.repoId.indexOf("YOUR-") === 0) {
-    note.hidden = false;
-    note.textContent = "Guestbook coming soon.";
-  } else {
-    var g = document.createElement("script");
-    g.src = "https://giscus.app/client.js";
-    g.async = true;
-    g.crossOrigin = "anonymous";
-    var attrs = {
-      "data-repo": GISCUS.repo,
-      "data-repo-id": GISCUS.repoId,
-      "data-category": GISCUS.category,
-      "data-category-id": GISCUS.categoryId,
-      "data-mapping": "specific",
-      "data-term": "Guestbook",
-      "data-strict": "0",
-      "data-reactions-enabled": "0",
-      "data-emit-metadata": "0",
-      "data-input-position": "top",
-      "data-theme": "light",
-      "data-lang": "en"
-    };
-    for (var k in attrs) g.setAttribute(k, attrs[k]);
-    wrap.appendChild(g);
-  }
-})();
-</script>
+      script.addEventListener("error", function () {
+        note.hidden = false;
+        note.textContent = "The guestbook could not load right now. Please try again later.";
+        console.error("Could not load the Giscus guestbook.");
+      });
+      frame.appendChild(script);
+    }());
+  </script>
 </body>
 </html>
