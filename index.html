@@ -229,27 +229,66 @@ var GISCUS = {
     }
   }
 
-  // Visitor count: GoatCounter records the hit, then we read the total back.
-  drawCounter("------");
-  if (GC_CODE.indexOf("YOUR-") !== 0) {
-    var gc = document.createElement("script");
-    gc.async = true;
-    gc.src = "https://gc.zgo.at/count.js";
-    gc.setAttribute("data-goatcounter", "https://" + GC_CODE + ".goatcounter.com/count");
-    gc.onload = function(){ setTimeout(readCount, 1500); };
-    document.head.appendChild(gc);
+// Visitor count: wait for GoatCounter to load, then retrieve the count.
+drawCounter("------");
+
+function readCount() {
+  if (
+    !window.goatcounter ||
+    typeof window.goatcounter.get_data !== "function"
+  ) {
+    return false;
   }
-  function readCount(){
-    var path = location.pathname || "/";
-    fetch("https://" + GC_CODE + ".goatcounter.com/counter/" + encodeURIComponent(path) + ".json")
-      .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function(j){
-        var s = String(j.count).replace(/[^0-9]/g, "");
-        while (s.length < 6) s = "0" + s;
-        drawCounter(s);
+
+  try {
+    // Get the exact page path GoatCounter is tracking.
+    var path = window.goatcounter.get_data().p;
+
+    fetch(
+      "https://centralstores.goatcounter.com/counter/" +
+      encodeURIComponent(path) +
+      ".json"
+    )
+      .then(function (response) {
+        if (!response.ok) throw new Error("HTTP " + response.status);
+        return response.json();
       })
-      .catch(function(){ /* leave dashes */ });
+      .then(function (data) {
+        var count = String(data.count).replace(/[^0-9]/g, "");
+
+        // Keep the retro six-digit counter.
+        while (count.length < 6) {
+          count = "0" + count;
+        }
+
+        drawCounter(count);
+      })
+      .catch(function (error) {
+        console.error("GoatCounter error:", error);
+        drawCounter("ERROR");
+      });
+
+    return true;
+  } catch (error) {
+    console.error("Could not read GoatCounter:", error);
+    return false;
   }
+}
+
+// Wait for the GoatCounter script to become available.
+var attempts = 0;
+
+var counterTimer = setInterval(function () {
+  attempts++;
+
+  if (readCount() || attempts >= 50) {
+    clearInterval(counterTimer);
+
+    if (attempts >= 50) {
+      drawCounter("OFFLINE");
+    }
+  }
+}, 100);
 
   // Guestbook: Giscus stores entries as GitHub Discussions on your repo.
   var wrap = document.getElementById("gbwrap");
